@@ -1,0 +1,15 @@
+name:        "Nodejs Sample Acorn"
+description: "Acorn running a Battleship game build using nodejs"
+readme:      "./README.md"
+icon:        "./nodejs.svg"
+
+containers: {
+    server: {
+        build: {
+        context:    "."
+        dockerfile: "./Dockerfile"
+        }
+        dirs: "/usr/src/app": "./"
+        ports: publish: "3000:3000/http"
+    }
+}
