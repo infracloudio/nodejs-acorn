@@ -2,11 +2,9 @@
 
 [Node.js](https://nodejs.org/en/) is a cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more. Node.js is a back-end JavaScript runtime environment, runs on the V8 JavaScript engine, and executes JavaScript code outside a web browser.
 
-[Acorn](http://www.acorn.io) is a cloud computing platform with a big free sandbox that anyone can use by registering with a GitHub account. It is designed to simplify running modern  cloud-native apps on the public cloud. You use familiar development and deployment workflows based on mainstream container tools without having to deal with provisioning or configuring any underlying cloud resources. Basically it provides all the power of Kubernetes and Terraform, without any of the complexity.
+[Acorn](http://www.acorn.io) offers a user-friendly cloud computing platform with a generous free sandbox accessible through GitHub registration. Designed to simplify the deployment of modern cloud-native apps, Acorn facilitates familiar development and deployment workflows using mainstream container tools. By eliminating the need to handle the provisioning or configuration of underlying cloud resources, Acorn provides the robust capabilities of Kubernetes and Terraform without the associated complexity. In this tutorial, we'll guide you through the process of defining and deploying a sample Node.js Application on the Acorn platform using an Acornfile, ultimately creating an easily deployable Acorn Image.
 
-To deploy an application on Acorn we need to define our application as an Acornfile, which will produce the Acorn Image that we can deploy on the platform.  In this tutorial, we will explore how to provision a sample Nodejs Application on Acorn.
-
-If you’re the kind of person who likes to skip to the end, you can [deploy the sample application in your sandbox now](https://acorn.io/run/ghcr.io/infracloudio/nodejs-acorn:v20.%23.%23-%23?ref=slayer321&name=nodejs) and just start poking around in it.  Sandbox deployments in Acorn are restricted by size, and run for two hours, so it should provide plenty of time for you to evaluate and test anything. You can start them over as often as you like, or you can upgrade to a paid Pro account if you want to run something in production.
+If you want to skip to the end, just click [Run in Acorn](https://acorn.io/run/ghcr.io/infracloudio/nodejs-acorn:v20.%23.%23-%23?ref=slayer321&name=nodejs) to launch the app immediately in a free sandbox environment. All you need to join is a GitHub ID to create an account.
 
 If you want to follow along, I’ll walk through the steps to deploy Battleship game build using nodejs on Acorn.
 
@@ -14,11 +12,11 @@ _Note: Everything shown in this tutorial can be found in [this repository](https
 
 ## Pre-requisites
 
-- [Acorn CLI](https://docs.acorn.io/installation/installing)
-- Github account to sign up for the Acorn Platform.
+- Acorn CLI: The CLI allows you to interact with the Acorn Runtime as well as Acorn to deploy and manage your applications. Refer to the [Installation documentation](https://docs.acorn.io/installation/installing) to install Acorn CLI for your environment.
+- A GitHub account is required to sign up and use the Acorn Platform.
 
 ## Acorn Login
-Login to the [Acorn Platform](http://beta.acorn.io) using the Github Sign-In option with your Github user.
+Log in to the [Acorn Platform](http://beta.acorn.io) using the Github Sign-In option with your Github user.
 ![](./assets/acorn-login-page.png)
 
 After the installation of Acorn CLI for your OS, you can login to the Acorn platform.
@@ -28,7 +26,7 @@ $ acorn login beta.acorn.io
 
 ## Create the Nodejs Application
 
-In this post we will create a simple Nodejs [Battleship game](https://en.wikipedia.org/wiki/Battleship_(game)) app following [this](https://github.com/kubowania/battleships) repo. It is a simple Battleship game that provides two modes you can play the game 
+In this tutorial we will create a simple Nodejs [Battleship game](https://en.wikipedia.org/wiki/Battleship_(game)) app following [this](https://github.com/kubowania/battleships) repo. It is a simple Battleship game that provides two modes you can play the game 
 - Single Player
 - Multiplayer
   
@@ -37,9 +35,9 @@ In the Acorn platform, there are two ways you can try this sample application.
 1. Using Acorn platform dashboard.
 2. Using CLI
 
-The First way is the easiest one where, in just a few clicks you can deploy the Nodejs Battleship game application on the platform and start using it. However, if you want to customize the application or want to understand how you can run your own Battleship applications using Acorn, use the second option.
+The first way is the easiest one where, in just a few clicks you can deploy the Nodejs Battleship game application on the platform and start using it. However, if you want to customize the application or want to understand how you can run your own Battleship applications using Acorn, use the second option.
 
-## Running the application using Dashboard
+## Deploying Using Acorn Dashboard
 
 In this option you use the published Acorn application image to deploy the Battleship application in just a few clicks. It allows you to deploy your applications faster without any additional configurations. Let us see below how you can deploy the vote app to the Acorn platform dashboard.
 
@@ -50,9 +48,9 @@ In this option you use the published Acorn application image to deploy the Battl
 ![](./assets/select-from-acorn-image.png)
 
    3.2. Provide a name "battleship”, use the default Region and provide the URL for the Acorn image and click Create.
-```
-ghcr.io/infracloudio/nodejs-acorn:v20.#.#-#
-```
+   ```
+   ghcr.io/infracloudio/nodejs-acorn:v20.#.#-#
+   ```
 ![](./assets/nodejs-deployment-preview.png)
 
 _Note: The App will be deployed in the Acorn Sandbox Environment. As the App is provisioned on AcornPlatform in the sandbox environment it will only be available for 2 hrs and after that it will be shutdown. Upgrade to a pro account to keep it running longer_.
@@ -66,7 +64,7 @@ _Note: The App will be deployed in the Acorn Sandbox Environment. As the App is 
    ![](./assets/battleship-singleplayer.png)
 
 
-## Running the Application using acorn CLI
+## Deploy Using Acorn CLI
 As mentioned previously, running the acorn application using CLI lets you understand the Acornfile. With the CLI option, you can customize the sample app to your requirement or use your Acorn knowledge to run your own Battleship Nodejs application.
 
 To run the application using CLI you first need to clone the source code repository on your machine.
@@ -76,7 +74,22 @@ $ git clone https://github.com/infracloudio/nodejs-acorn.git
 ```
 Once cloned here’s how the directory structure will look.
 
-![](./assets/nodejs-root-dir.png)
+```
+.
+├── Acornfile
+├── Dockerfile
+├── LICENSE
+├── nodejs.svg
+|........
+├── public
+│   ├── app.js
+|   |.....
+│   ├── singleplayer.html
+│   └── style.css
+├── README.md
+├── server.js
+
+```
 
 ### Understanding the Acornfile
 
@@ -84,7 +97,18 @@ We have the sample Battleship Nodejs Application ready. Now to run the applicati
 
 Below is the Acornfile for deploying the Battleship nodejs app that we created earlier:
 
-![](./assets/nodejs-acornfile.png)
+```
+containers: {
+    server: {
+        build: {
+        context:    "."
+        dockerfile: "./Dockerfile"
+        }
+        dirs: "/usr/src/app": "./"
+        ports: publish: "3000:3000/http"
+    }
+}
+```
 
 There is single requirements for running Battleship Nodejs Application
 - Application Itself
@@ -125,7 +149,6 @@ If you are developing your application and don't want to start and stop the appl
 ```
 $ acorn dev -n battleship .
 ```
-
 
 ## Push an artifact to a registry
 
