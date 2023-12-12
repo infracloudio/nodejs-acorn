@@ -17,14 +17,14 @@ If you want to follow along, I’ll walk through the steps to deploy Battleship 
 
 ## Acorn Login
 
-Log in to the [Acorn Platform](http://beta.acorn.io) using the Github Sign-In option with your Github user.
+Log in to the [Acorn Platform](http://acorn.io) using the Github Sign-In option with your Github user.
 
 ![Acorn Login](./assets/acorn-login-page.png)
 
 After the installation of Acorn CLI for your OS, you can login to the Acorn platform.
 
 ```sh
-$ acorn login beta.acorn.io
+$ acorn login
 ```
 
 ## Create the Nodejs Application
